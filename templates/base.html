@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'images/aplus_logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>{% block title %}{% endblock %} | Annapurna+</title>
+    <style>
+        h1{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .header-logo{
+            height: 60px;
+            object-fit: cover;
+            margin-right: 8px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header begins -->
+    <header class="header-container">
+        <div class="header">
+            <span class="menu">≣</span>
+             <h1> <img src="{% static 'images/aplus_logo.png' %}" alt="" class="header-logo">  <a href="{% url 'home_view' %}" class="masthead">Annapurna+</a> </h1>
+        </div>
+    </header>
+    <!-- Top Header ENDS -->
+
+    <!-- App Wrapper Begins -->
+    <div class="app-wrapper">
+        
+        <!-- Navbar begins -->
+        <nav class="navbar">
+            <span class="close-menu">X</span>
+            <div class="main-nav">
+                <h3>Menu</h3>
+                <a href="{% url 'home_view' %}" class="main-link">HOME</a>
+                <a href="{% url 'posts:people' %}" class="main-link">People</a>
+                <a href="{% url 'posts:programs' %}" class="main-link">Programs</a>
+                {% comment %}
+                <a href="{% url 'posts:blog_list' %}" class="main-link">Latest Blogs</a>
+                {% endcomment %}
+                <h3>Blog Topics</h3>
+                {% for category in categories %}
+                <a href="{% url 'posts:category_blogs' category.id category.slug %}" class="main-link">{{category.name}}</a>
+                {% endfor %}
+                {% comment %}
+                <h3>Latest Blogs</h3>
+                {% for blog in latest_blogs %}
+                <a href="{% url 'posts:blog_detail' blog.id %}">{{blog.title}}</a>
+                {% endfor %}
+                {% endcomment %}
+                
+                {% if not request.user.is_authenticated %}
+                <details>
+                    <summary> Login </summary>
+                    <form action="{% url 'login' %}" method="POST" class="login-form">
+                    {% csrf_token %}
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="password" required>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                    <input type="submit" value="Login">
+                </form>
+                </details>
+                
+                {% comment %}
+                <a href="{% url 'login' %}" class="main-link">Login</a>
+                
+                <a href="{% url 'register' %}" class="main-link">Register</a>
+                {% endcomment %}
+                {% else %}
+                <h3>Manage</h3> 
+                <a href="{% url 'logout' %}" class="main-link">Logout</a>
+                {% endif %}
+                {%if request.user.is_authenticated and request.user.is_staff %}
+                <a href="{% url 'admin:index' %}" class="main-link">Admin</a>
+                {% comment %}
+                <a href="{% url 'posts:add_blog' %}" class="main-link">Add Blog</a>
+                {% endcomment %}
+                {% endif %}
+                
+            </div>
+        </nav>
+      <!-- Navbar Ends -->
+        <section class="page-layout">
+             <!-- Main Content Begins -->
+        <main class="main-content">
+
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <!-- Main Content ENDS -->
+        <article class="right-fixed-sidebar">
+            <h3 class="section-title">Upcoming Events</h3>
+                {% if upcoming_events %}  
+                {% for event in upcoming_events %}
+                <div class="event">
+                    <h3 class="item-title">{{event.title}}</h3>
+                    <p><b>Date and Time:</b>{{event.event_date}}</p>
+                    <p><b>Venue: </b>{{event.venue}}</p>
+                   
+                    <p> <b>Organizer:</b> {{event.organizer}}</p>
+                    <details>
+                        <summary><b>Event Detail</b></summary>
+                        <p>{{event.description}}</p>
+                    </details>
+                </div>
+                {% endfor %}
+                {% endif %}
+        </article>
+        </section>
+       
+    </div>
+    <!-- App Wrapper ENDS -->
+   
+    <!-- Footer Begins -->
+    <footer class="footer">
+            <p>&copy; Annapurna+ {% now 'Y' %} - Present. All Rights Reserved.</p>
+    </footer>
+    <!-- Footer ENDS -->
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            function toggleMenu(menuClass, navbarClass){
+document.querySelector(menuClass).addEventListener('click', ()=>{
+                document.querySelector(navbarClass).classList.toggle('visible')
+            })
+            }
+            toggleMenu('.menu', '.navbar')
+            toggleMenu('.close-menu', '.navbar')
+          });
+    </script>
+</body>
+</html>

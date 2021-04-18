@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock title%}
+
+{% block content%}
+
+<div class="login-page">
+    {% if messages %}
+    {% for message in messages %}
+    <p class="login-page-message" >{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    <h2>Login</h2>
+    <form action="{% url 'login' %}" method="POST" class="login-form">
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text" name="username" id="password" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <input type="submit" value="Login">
+    </form>
+</div>
+<script>
+    function fadeMessage(){
+        document.querySelector('.login-page-message').style.transform ='scale(0)'
+    }
+    setTimeout(fadeMessage, 3000)
+</script>
+{% endblock %}

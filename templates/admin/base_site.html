@@ -1,0 +1,16 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %} Annapurna+ ADMIN{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Annapurna+ Admin</a></h1>
+
+
+{% endblock %}
+{% block static %}
+<link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+

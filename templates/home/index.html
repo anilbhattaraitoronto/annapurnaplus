@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Welcome {% endblock %}
+{% block content %}
+
+<div class="home-page">
+    {% if messages%}
+    {% for message in messages %}
+    <p class="message">{{message}}</p>
+    {% endfor %}
+    {% endif %}
+   
+    <main class="home-page-content">
+        
+   <article class="home-main-content">
+    <header class="home-page-header">
+        <h2 class="page-title">Welcome</h2>
+    </header>
+         <div class="featured-post">
+            {% if featured_blog %}
+            <h3 class="section-title">Featured Blog</h3>
+            <div class="post">
+                <img src="{{featured_blog.thumbnail.url}}" alt="{{featured_blog.title}}" class="featured-blog-image"> 
+                <h3>{{featured_blog.title}}</h3>
+           
+            </div>
+        
+            {% endif %}
+        </div>
+        <div class="latest-blog-list">
+            {% if latest_blogs %}
+            <h3 class="section-title">Latest Blogs</h3>
+            {% for blog in latest_blogs %}
+            <article class="blog">
+                <h3 class="item-title">{{blog.title}}</h3>
+            </article>
+            {% endfor %}
+            {% endif %}
+        </div>
+   </article>
+      {% comment %}
+        <div class="event-list">
+            <h3 class="section-title">Upcoming Events</h3>
+            {% if upcoming_events %}
+            {% for event in upcoming_events %}
+            <div class="event">
+                <h3 class="item-title">{{event.title}}</h3>
+                <p><b>Date and Time:</b>{{event.event_date}}</p>
+                <p><b>Venue: </b>{{event.venue}}</p>
+               
+                <p> <b>Organizer:</b> {{event.organizer}}</p>
+                <details>
+                    <summary><b>Event Detail</b></summary>
+                    <p>{{event.description}}</p>
+                </details>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endcomment %}
+    
+    
+    </main>
+    
+</div>
+<script>
+    function fadeMessage(){
+        document.querySelector('.message').style.transform ='scale(0)'
+    }
+    setTimeout(fadeMessage, 5000)
+</script>
+{% endblock content %}

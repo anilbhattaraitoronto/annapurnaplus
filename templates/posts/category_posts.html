@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{category.name}}{% endblock title%}
+{% block content %}
+<main class="category-post-page">
+    {% if category_posts %}
+    <h2>Posts about <b>{{category.name}}</b> </h2>
+    <div class="category-post-container">
+        {% for post in category_posts %}
+        <div class="category-post">
+            <h3>{{post.title}}</h3>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>We do not yet have posts on <b>{{category.name}}</b> </p>
+    {% endif %}
+    
+</main>
+{% endblock content %}
