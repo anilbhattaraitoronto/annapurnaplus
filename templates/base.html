@@ -92,9 +92,9 @@
                    <h3 class="section-title">Latest Blogs</h3>
                    <ul>
                        {% for blog in latest_blogs %}
-                <li class="side-blog">
-                     <a href="{% url 'posts:blog_detail' blog.id %}">{{blog.title}}</a>
-                </li>
+                        <li class="side-blog">
+                            <a href="{% url 'posts:blog_detail' blog.id %}" class="item-title side-blog-link">{{blog.title}}</a>
+                        </li>
                    </ul>
                 
                
