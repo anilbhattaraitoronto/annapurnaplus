@@ -4,12 +4,11 @@ import datetime
 
 
 def home_view(request):
-    latest_blogs = Blog.objects.filter(is_archived=False)
-    featured_blog = latest_blogs.filter(is_featured=True).first()
+
+    featured_blog = Blog.objects.filter(is_featured=True).first()
     upcoming_events = Event.objects.filter(
         event_date__gte=datetime.date.today())
     context = {
-        'latest_blogs': latest_blogs,
         'featured_blog': featured_blog,
         'upcoming_events': upcoming_events
     }
