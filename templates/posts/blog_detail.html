@@ -3,5 +3,23 @@
 {% block title %} {{blog.title}}| {{blog.author}} {% endblock %}
 
 {% block content %}
-<h2>Blog Detail</h2>
+{% if blog %}
+<div class="blog-detail">
+            
+   
+   <div class="blog-content">
+    <p> <a href="{% url 'posts:category_blogs' blog.category_id blog.category.slug %}" class="category-link">{{blog.category.name | lower}}</a> </p>
+        <h3 class="blog-detail-title">{{blog.title}}</h3>
+        <h4 class="blog-detail-author">{{blog.author}}</h4>
+        <img src="{{blog.thumbnail.url}}" alt="{{blog.title}}" class="featured-blog-image">
+        
+        <p>{{blog.content | safe }}</p>
+        <div class="blog-date-container">
+        <p class="blog-date"><b><em>Created:</em></b>  {{blog.created_date}}</p>
+        <p class="blog-date"><b><em>Updated:</em></b>  {{blog.updated_date}}</p>
+        </div>
+   </div>
+  
+</div>
+{% endif %}
 {% endblock content %}

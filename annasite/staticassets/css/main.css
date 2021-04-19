@@ -309,6 +309,19 @@ input[type='submit']:hover, input[type='submit']:focus {
 
 }
  /* Featured Blog styles END */
+ .blog-detail{
+     max-width: 500px;
+     margin: auto;
+     padding: 20px 0;
+     line-height: 1.8;
+ }
+ .blog-detail-title{
+     font-size: 1.8em;
+ }
+ .blog-detail-title, .blog-detail-author{
+     text-align: center;
+     padding: 20px 0;
+ }
 
 /* Footer Styles Begin */
 footer{
