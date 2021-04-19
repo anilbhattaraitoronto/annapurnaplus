@@ -47,7 +47,8 @@ def category_blogs(request, slug, category_id=None):
 
 
 def blog_detail(request, id):
-    return render(request, 'posts/blog_detail.html', {})
+    blog = get_object_or_404(Blog, pk=id)
+    return render(request, 'posts/blog_detail.html', {'blog': blog})
 
 
 def people_list(request):

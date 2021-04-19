@@ -17,13 +17,19 @@
             {% if featured_blog %}
             <h3 class="section-title">Featured Blog</h3>
             <div class="post">
-                <img src="{{featured_blog.thumbnail.url}}" alt="{{featured_blog.title}}" class="featured-blog-image"> 
+                <img src="{{featured_blog.thumbnail.url}}" alt="{{featured_blog.title}}" class="featured-blog-image">
+                <p> <a href="{% url 'posts:category_blogs' featured_blog.category_id featured_blog.category.slug %}">{{featured_blog.category.name | lower}}</a> </p>
                 <h3>{{featured_blog.title}}</h3>
+                <h4 class="author">{{featured_blog.author}}</h4>
+                <p>{{featured_blog.summary | safe }} <a href="{% url 'posts:blog_detail' featured_blog.id %}">read full</a> </p>
+                <p>Created: {{featured_blog.created_date}}</p>
+                <p>Updated: {{featured_blog.updated_date}}</p>
            
             </div>
         
             {% endif %}
         </div>
+        {% comment %}
         <div class="latest-blog-list">
             {% if latest_blogs %}
             <h3 class="section-title">Latest Blogs</h3>
@@ -34,6 +40,7 @@
             {% endfor %}
             {% endif %}
         </div>
+        {% endcomment %}
    </article>
       {% comment %}
         <div class="event-list">
