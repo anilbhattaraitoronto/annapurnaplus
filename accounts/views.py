@@ -19,7 +19,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(
-                request, "You have successfully logged in. Welcome")
+                request, "You have successfully logged in.")
             return HttpResponseRedirect(reverse('home_view'))
 
     return HttpResponseRedirect(reverse('home_view'))
@@ -29,5 +29,5 @@ def logout_view(request):
 
     logout(request)
     messages.success(
-        request, 'You have successfully logged out. You can login or roam around elsewhere!')
+        request, 'You have successfully logged out.')
     return HttpResponseRedirect(reverse('home_view'))

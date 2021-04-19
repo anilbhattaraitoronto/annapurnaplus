@@ -5,11 +5,7 @@
 {% block content %}
 
 <div class="home-page">
-    {% if messages%}
-    {% for message in messages %}
-    <p class="message">{{message}}</p>
-    {% endfor %}
-    {% endif %}
+    
    
     <main class="home-page-content">
         
@@ -64,10 +60,5 @@
     </main>
     
 </div>
-<script>
-    function fadeMessage(){
-        document.querySelector('.message').style.transform ='scale(0)'
-    }
-    setTimeout(fadeMessage, 5000)
-</script>
+
 {% endblock content %}

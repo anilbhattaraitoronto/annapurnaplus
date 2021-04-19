@@ -25,73 +25,38 @@
 <body>
     <!-- Top Header begins -->
     <header class="header-container">
-        <div class="header">
+        <header class="top-header">
             <span class="menu">≣</span>
-             <h1> <img src="{% static 'images/aplus_logo.png' %}" alt="" class="header-logo">  <a href="{% url 'home_view' %}" class="masthead">Annapurna+</a> </h1>
-        </div>
-    </header>
-    <!-- Top Header ENDS -->
+            <a href="{% url 'home_view' %}" ><h1> <img src="{% static 'images/aplus_logo.png' %}" alt="" class="header-logo" width="50"> <span class="masthead">Annapurna+</span>  </h1></a>
 
-    <!-- App Wrapper Begins -->
-    <div class="app-wrapper">
-        
-        <!-- Navbar begins -->
-        <nav class="navbar">
-            <span class="close-menu">X</span>
+        <!-- main-nav begins -->
             <div class="main-nav">
-                <h3>Menu</h3>
+                <span class="close-menu">X</span>
                 <a href="{% url 'home_view' %}" class="main-link">HOME</a>
                 <a href="{% url 'posts:people' %}" class="main-link">People</a>
                 <a href="{% url 'posts:programs' %}" class="main-link">Programs</a>
                 {% comment %}
                 <a href="{% url 'posts:blog_list' %}" class="main-link">Latest Blogs</a>
                 {% endcomment %}
-                <h3>Blog Topics</h3>
-                {% for category in categories %}
-                <a href="{% url 'posts:category_blogs' category.id category.slug %}" class="main-link">{{category.name}}</a>
-                {% endfor %}
-                {% comment %}
-                <h3>Latest Blogs</h3>
-                {% for blog in latest_blogs %}
-                <a href="{% url 'posts:blog_detail' blog.id %}">{{blog.title}}</a>
-                {% endfor %}
-                {% endcomment %}
-                
-                {% if not request.user.is_authenticated %}
-                <details>
-                    <summary> Login </summary>
-                    <form action="{% url 'login' %}" method="POST" class="login-form">
-                    {% csrf_token %}
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="password" required>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" required>
-                    <input type="submit" value="Login">
-                </form>
-                </details>
-                
-                {% comment %}
-                <a href="{% url 'login' %}" class="main-link">Login</a>
-                
-                <a href="{% url 'register' %}" class="main-link">Register</a>
-                {% endcomment %}
-                {% else %}
-                <h3>Manage</h3> 
-                <a href="{% url 'logout' %}" class="main-link">Logout</a>
-                {% endif %}
-                {%if request.user.is_authenticated and request.user.is_staff %}
-                <a href="{% url 'admin:index' %}" class="main-link">Admin</a>
-                {% comment %}
-                <a href="{% url 'posts:add_blog' %}" class="main-link">Add Blog</a>
-                {% endcomment %}
-                {% endif %}
-                
             </div>
-        </nav>
-      <!-- Navbar Ends -->
+        </header>
+           
+       <!-- main-nav ends -->
+    </header>
+    <!-- Top Header ENDS -->
+
+    <!-- App Wrapper Begins -->
+    <div class="app-wrapper">
+        
+        
         <section class="page-layout">
              <!-- Main Content Begins -->
         <main class="main-content">
+            {% if messages%}
+    {% for message in messages %}
+    <p class="message">{{message}}</p>
+    {% endfor %}
+    {% endif %}
 
             {% block content %}
             {% endblock content %}
@@ -114,6 +79,60 @@
                 </div>
                 {% endfor %}
                 {% endif %}
+                <div class="category-nav">
+                    <h3 class="section-title">Blog Topics</h3>
+                    {% if categories %}
+                    {% for category in categories %}
+                    <a href="{% url 'posts:category_blogs' category.id category.slug %}" class="category-link">{{category.name}}</a>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                
+               <div class="side-blog-container">
+                   <h3 class="section-title">Latest Blogs</h3>
+                   <ul>
+                       {% for blog in latest_blogs %}
+                <li class="side-blog">
+                     <a href="{% url 'posts:blog_detail' blog.id %}">{{blog.title}}</a>
+                </li>
+                   </ul>
+                
+               
+                {% endfor %}
+               </div>
+                
+                
+                
+                {% if not request.user.is_authenticated %}
+              <div class="form-container">
+                <h3 class="section-title">Login</h3>
+                <form action="{% url 'login' %}" method="POST" class="login-form">
+                    {% csrf_token %}
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="password" required>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                    <input type="submit" value="Login">
+                </form>
+              </div>
+             
+                
+                
+                {% comment %}
+                <a href="{% url 'login' %}" class="main-link">Login</a>
+                
+                <a href="{% url 'register' %}" class="main-link">Register</a>
+                {% endcomment %}
+                {% else %}
+                <h3 class="section-title">Manage</h3> 
+                <a href="{% url 'logout' %}" class="auth-link">Logout</a>
+                {% endif %}
+                {%if request.user.is_authenticated and request.user.is_staff %}
+                <a href="{% url 'admin:index' %}" class="auth-link">Admin</a>
+                {% comment %}
+                <a href="{% url 'posts:add_blog' %}" class="auth-link">Add Blog</a>
+                {% endcomment %}
+                {% endif %}
         </article>
         </section>
        
@@ -134,9 +153,16 @@ document.querySelector(menuClass).addEventListener('click', ()=>{
                 document.querySelector(navbarClass).classList.toggle('visible')
             })
             }
-            toggleMenu('.menu', '.navbar')
-            toggleMenu('.close-menu', '.navbar')
+            toggleMenu('.menu', '.main-nav')
+            toggleMenu('.close-menu', '.main-nav')
           });
+
+          
+            function fadeMessage(){
+                document.querySelector('.message').style.transform ='scale(0)'
+            }
+            setTimeout(fadeMessage, 5000)
+
     </script>
 </body>
 </html>
