@@ -39,6 +39,13 @@ a{
     max-width: 1200px;
     margin:auto;
 }
+.header-logo{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    margin-right: 8px;
+    border-radius: 50%;
+}
 
 .app-wrapper{
     display: grid;
