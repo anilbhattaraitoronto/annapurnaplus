@@ -207,7 +207,7 @@ summary:hover{
     padding: 20px;
     transition: 250ms all ease-in-out;
     position: absolute;
-    top: -50px;
+    top: 0px;
     left: 0;
     right: 0;
     width: 80%;

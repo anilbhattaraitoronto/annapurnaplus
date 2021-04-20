@@ -2,7 +2,26 @@
 {% load static %}
 {% block title %}List of Programs{% endblock title %}
 {% block content %}
-<main class="program-page">
-    <h2 class="page-title">Our Programs</h2>
+<style>
+    .program{
+        line-height: 1.7;
+        padding: 8px 0;
+        width: 100%;
+        margin: 10px auto;
+        border-bottom: 1px solid lightgray;
+    }
+</style>
+<main class="program-page page">
+    <h2 class="page-title">Programs</h2>
+    {% if programs %}
+    {% for program in programs %}
+    <div class="program">
+        <h3 class="item-title">{{program.title}}</h3>
+        <p>Director: {{program.director}}</p>
+        <p>Contact: {{program.contact_email}}</p>
+        <p>{{program.description}}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
 </main>
 {% endblock content %}
