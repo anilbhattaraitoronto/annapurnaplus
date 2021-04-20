@@ -343,9 +343,9 @@ footer{
     .page-layout{
         grid-template-columns: 1fr;
     }
-    .masthead{
+    /* .masthead{
         display: none;
-    }
+    } */
 }
 
 @media(max-width:650px){
