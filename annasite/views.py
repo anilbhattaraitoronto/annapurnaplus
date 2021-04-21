@@ -5,7 +5,7 @@ import datetime
 
 def home_view(request):
 
-    featured_blog = Blog.objects.filter(is_featured=True).first()
+    featured_blog = Blog.objects.filter(is_featured=True).last()
     upcoming_events = Event.objects.filter(
         event_date__gte=datetime.date.today())
     context = {

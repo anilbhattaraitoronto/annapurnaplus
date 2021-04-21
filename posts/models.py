@@ -1,6 +1,8 @@
 from django.db import models
 from helpers.models import TrackingModel
 from accounts.models import User
+from ckeditor_uploader.fields import RichTextUploadingField
+
 
 # Create your models here.
 
@@ -23,10 +25,11 @@ class Blog(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     author = models.CharField(max_length=255)
-    summary = models.TextField()
+    summary = models.CharField(max_length=255)
     thumbnail = models.ImageField(
         blank=True, null=True, upload_to='uploads/blogs/%m')
-    content = models.TextField()
+    # content = models.TextField()
+    content = RichTextUploadingField()
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
     # owner = models.ForeignKey(User, on_delete=models.CASCADE)

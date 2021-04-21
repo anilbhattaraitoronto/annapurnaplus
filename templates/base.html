@@ -74,27 +74,26 @@
                 </div>
                 {% endfor %}
                 {% endif %}
-                <div class="category-nav">
-                    <h3 class="section-title">Blog Topics</h3>
-                    {% if categories %}
-                    {% for category in categories %}
-                    <a href="{% url 'posts:category_blogs' category.id category.slug %}" class="category-link">{{category.name}}</a>
-                    {% endfor %}
-                    {% endif %}
-                </div>
+                
                 
                <div class="side-blog-container">
                    <h3 class="section-title">Latest Blogs</h3>
                    <ul>
                        {% for blog in latest_blogs %}
                         <li class="side-blog">
-                            <a href="{% url 'posts:blog_detail' blog.id %}" class="item-title side-blog-link">{{blog.title}}</a>
-                        </li>
+                            <a href="{% url 'posts:blog_detail' blog.id blog.slug %}" class="item-title side-blog-link">{{blog.title}}</a>
+                        </li>  
+                        {% endfor %}
                    </ul>
-                
-               
-                {% endfor %}
                </div>
+               <div class="category-nav">
+                <h3 class="section-title">Blog Topics</h3>
+                {% if categories %}
+                {% for category in categories %}
+                <a href="{% url 'posts:category_blogs' category.id category.slug %}" class="category-link">{{category.name}}</a>
+                {% endfor %}
+                {% endif %}
+            </div>
                 
                 
                 

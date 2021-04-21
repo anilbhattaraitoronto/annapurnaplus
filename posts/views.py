@@ -47,7 +47,7 @@ def category_blogs(request, slug, category_id=None):
 #     return render(request, 'posts/add_blog.html', context)
 
 
-def blog_detail(request, id):
+def blog_detail(request, slug,  id):
     blog = get_object_or_404(Blog, pk=id)
     return render(request, 'posts/blog_detail.html', {'blog': blog})
 

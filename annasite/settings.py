@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+    'ckeditor_uploader',
     'accounts',
     'posts'
 ]
@@ -125,3 +127,7 @@ STATICFILES_DIRS = [BASE_DIR / 'annasite/staticassets', ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH = 'uploads/posts/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'

@@ -22,7 +22,7 @@
                 <p> <a href="{% url 'posts:category_blogs' featured_blog.category_id featured_blog.category.slug %}" class="category-link">{{featured_blog.category.name | lower}}</a> </p>
                 <h3 class="item-title">{{featured_blog.title}}</h3>
                 <h4 class="author">{{featured_blog.author}}</h4>
-                <p>{{featured_blog.summary | safe }} <a href="{% url 'posts:blog_detail' featured_blog.id %}" class="read-full-link">read full</a> </p>
+                <p>{{featured_blog.summary | safe }} <a href="{% url 'posts:blog_detail' featured_blog.id featured_blog.slug %}" class="read-full-link">read full</a> </p>
                 <div class="blog-date-container">
                 <p class="blog-date"><b><em>Created:</em></b>  {{featured_blog.created_date}}</p>
                 <p class="blog-date"><b><em>Updated:</em></b>  {{featured_blog.updated_date}}</p>

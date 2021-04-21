@@ -7,7 +7,7 @@ urlpatterns = [
     path('bloglist', views.blog_list, name='blog_list'),
     path('people', views.people_list, name='people'),
     path('program', views.program_list, name='programs'),
-    path('<id>', views.blog_detail, name='blog_detail'),
+    path('<id>/<slug>', views.blog_detail, name='blog_detail'),
     path('category/<category_id>/<slug>',
          views.category_blogs, name="category_blogs"),
 
