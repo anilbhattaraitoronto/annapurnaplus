@@ -14,7 +14,7 @@ def blog_list(request):
 
 def category_blogs(request, slug, category_id=None):
     category = get_object_or_404(Category, id=category_id)
-    category_blogs = Blog.objects.filter(category__id=category_id)
+    category_blogs = category.blog_set.all()
     print('category blogs are', category_blogs)
     context = {
         'category': category,
