@@ -83,7 +83,7 @@
                    <ul>
                        {% for blog in latest_blogs %}
                         <li class="side-blog">
-                            <a href="{{blog.get_absolute_url}}" class="item-title side-blog-link">{{blog.title}}</a>
+                            ➤ <a href="{{blog.get_absolute_url}}" class="item-title side-blog-link">{{blog.title}}</a>
                         </li>  
                         {% endfor %}
                    </ul>
@@ -91,7 +91,7 @@
                <div class="category-nav">
                 <h3 class="section-title">Blog Topics</h3>
                 {% if categories %}
-                {% for category in categories %}
+                {% for category in categories %} 
                 <a href="{{category.get_absolute_url}}" class="category-link">{{category.name}}</a>
                 {% endfor %}
                 {% endif %}
