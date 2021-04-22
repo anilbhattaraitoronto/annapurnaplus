@@ -11,7 +11,9 @@
     <p> <a href="{{blog.category.get_absolute_url}}" class="category-link">{{blog.category.name | lower}}</a> </p>
         <h3 class="blog-detail-title">{{blog.title}}</h3>
         <h4 class="blog-detail-author">{{blog.author}}</h4>
+        {% if blog.image %}
         <img src="{{blog.image.url}}" alt="{{blog.title}}" class="featured-blog-image">
+        {% endif %}
         
         <p>{{blog.content | safe }}</p>
         <div class="blog-date-container">
