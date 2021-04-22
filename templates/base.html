@@ -58,6 +58,36 @@
         </main>
         <!-- Main Content ENDS -->
         <article class="right-fixed-sidebar">
+            {% if not request.user.is_authenticated %}
+              <div class="form-container">
+                <a class=" login-button">Login<a/>
+                <form action="{% url 'login' %}" method="POST" class="login-form">
+                    <span class="close-form-button">X</span>
+                    {% csrf_token %}
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="password" required>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                    <input type="submit" value="Login">
+                </form>
+              </div>
+             
+                
+                
+                {% comment %}
+                <a href="{% url 'login' %}" class="main-link">Login</a>
+                
+                <a href="{% url 'register' %}" class="main-link">Register</a>
+                {% endcomment %}
+                {% else %}
+                <a href="{% url 'logout' %}" class="auth-link">Logout</a>
+                {% endif %}
+                {%if request.user.is_authenticated and request.user.is_staff %}
+                <a href="{% url 'admin:index' %}" class="auth-link">Admin</a>
+                {% comment %}
+                <a href="{% url 'posts:add_blog' %}" class="auth-link">Add Blog</a>
+                {% endcomment %}
+                {% endif %}
             <h3 class="section-title">Upcoming Events</h3>
                 {% if upcoming_events %}  
                 {% for event in upcoming_events %}
@@ -99,36 +129,7 @@
                 
                 
                 
-                {% if not request.user.is_authenticated %}
-              <div class="form-container">
-                <h3 class="section-title">Login</h3>
-                <form action="{% url 'login' %}" method="POST" class="login-form">
-                    {% csrf_token %}
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="password" required>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" required>
-                    <input type="submit" value="Login">
-                </form>
-              </div>
-             
                 
-                
-                {% comment %}
-                <a href="{% url 'login' %}" class="main-link">Login</a>
-                
-                <a href="{% url 'register' %}" class="main-link">Register</a>
-                {% endcomment %}
-                {% else %}
-                <h3 class="section-title">Manage</h3> 
-                <a href="{% url 'logout' %}" class="auth-link">Logout</a>
-                {% endif %}
-                {%if request.user.is_authenticated and request.user.is_staff %}
-                <a href="{% url 'admin:index' %}" class="auth-link">Admin</a>
-                {% comment %}
-                <a href="{% url 'posts:add_blog' %}" class="auth-link">Add Blog</a>
-                {% endcomment %}
-                {% endif %}
         </article>
         </section>
        
@@ -140,7 +141,7 @@
             <p>&copy; Annapurna+ {% now 'Y' %} - Present. All Rights Reserved.</p>
     </footer>
     <!-- Footer ENDS -->
-
+    
     <script>
         
         document.addEventListener('DOMContentLoaded', () => {
@@ -155,9 +156,22 @@ document.querySelector(menuClass).addEventListener('click', ()=>{
 
           
             function fadeMessage(){
-                document.querySelector('.message').style.transform ='scale(0)'
+                let messageContainer = document.querySelector('.message')
+                if(messageContainer){
+                    messageContainer.style.transform ='scale(0)'
+                }
             }
             setTimeout(fadeMessage, 5000)
+            let loginButton = document.querySelector('.login-button')
+            let closeFormButton = document.querySelector('.close-form-button')
+            function toggleForm (){
+                let loginForm = document.forms[0]
+                
+                loginForm? loginForm.classList.toggle('show'):''
+            }
+            loginButton.addEventListener('click', toggleForm)
+            closeFormButton.addEventListener('click', toggleForm)
+           
 
     </script>
 </body>
