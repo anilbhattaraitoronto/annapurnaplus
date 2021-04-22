@@ -13,7 +13,7 @@
            <div class="category-blog-content">
                 <h3 class="item-title">{{blog.title}}</h3>
                 <h4 class="author">{{blog.author}}</h4>
-                <p>{{blog.summary | safe }} <a href="{% url 'posts:blog_detail' blog.id blog.slug %}" class="read-full-link">read full</a> </p>
+                <p>{{blog.summary | safe }} <a href="{{blog.get_absolute_url}}" class="read-full-link">read full</a> </p>
                 <div class="blog-date-container">
                 <p class="blog-date"><b><em>Created:</em></b>  {{blog.created_date}}</p>
                 <p class="blog-date"><b><em>Updated:</em></b>  {{blog.updated_date}}</p>

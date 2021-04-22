@@ -8,7 +8,7 @@
             
    
    <div class="blog-content">
-    <p> <a href="{% url 'posts:category_blogs' blog.category_id blog.category.slug %}" class="category-link">{{blog.category.name | lower}}</a> </p>
+    <p> <a href="{{blog.category.get_absolute_url}}" class="category-link">{{blog.category.name | lower}}</a> </p>
         <h3 class="blog-detail-title">{{blog.title}}</h3>
         <h4 class="blog-detail-author">{{blog.author}}</h4>
         <img src="{{blog.thumbnail.url}}" alt="{{blog.title}}" class="featured-blog-image">

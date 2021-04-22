@@ -73,6 +73,8 @@
                     </details>
                 </div>
                 {% endfor %}
+                {% else %}
+                <p>No upcoming events scheduled, yet.</p>
                 {% endif %}
                 
                 
@@ -81,7 +83,7 @@
                    <ul>
                        {% for blog in latest_blogs %}
                         <li class="side-blog">
-                            <a href="{% url 'posts:blog_detail' blog.id blog.slug %}" class="item-title side-blog-link">{{blog.title}}</a>
+                            <a href="{{blog.get_absolute_url}}" class="item-title side-blog-link">{{blog.title}}</a>
                         </li>  
                         {% endfor %}
                    </ul>
@@ -90,7 +92,7 @@
                 <h3 class="section-title">Blog Topics</h3>
                 {% if categories %}
                 {% for category in categories %}
-                <a href="{% url 'posts:category_blogs' category.id category.slug %}" class="category-link">{{category.name}}</a>
+                <a href="{{category.get_absolute_url}}" class="category-link">{{category.name}}</a>
                 {% endfor %}
                 {% endif %}
             </div>

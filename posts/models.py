@@ -2,6 +2,7 @@ from django.db import models
 from helpers.models import TrackingModel
 from accounts.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.urls import reverse
 
 
 # Create your models here.
@@ -13,6 +14,9 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'categories'
+
+    def get_absolute_url(self):
+        return reverse('posts:category_blogs', args=[str(self.id), self.slug])
 
     def __str__(self):
         return self.name
@@ -33,6 +37,10 @@ class Blog(models.Model):
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
     # owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+
+        return reverse('posts:blog_detail', args=[str(self.id), self.slug])
 
     def __str__(self):
         return self.title
@@ -96,7 +104,7 @@ class Person(models.Model):
 
 
 class Presentation(models.Model):
-    event = models.ForeignKey(to=Event, on_delete=models.DO_NOTHING)
+    event = models.ForeignKey(to=Event, on_delete=models.CASCADE)
     person = models.ForeignKey(to=Person, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
