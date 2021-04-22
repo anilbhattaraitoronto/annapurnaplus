@@ -30,6 +30,13 @@
             <h3 class="item-title">{{person.salutation}}. {{person.fullname}}</h3>
             <p>{{person.role_choice}}</p>
             <p>{{person.bio}}</p>
+            <h4>Presentations</h4>
+            {% for item in person.presentation_set.all %}
+            <div class="presentation-list"> 
+            <p>Event: {{item.event.title}}</p>
+            <p>Download Presentation: <a href="{{item.document.url}}" target="_blank" noreferrer >{{item.title}}</a></p>
+            </div>
+            {% endfor %}
         </div>
         
         {% endfor %}

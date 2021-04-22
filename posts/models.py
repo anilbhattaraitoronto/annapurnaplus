@@ -93,3 +93,14 @@ class Person(models.Model):
 
     def __str__(self):
         return self.fullname
+
+
+class Presentation(models.Model):
+    event = models.ForeignKey(to=Event, on_delete=models.DO_NOTHING)
+    person = models.ForeignKey(to=Person, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255)
+    document = models.FileField(upload_to='events/uploads/')
+
+    def __str__(self):
+        return self.title

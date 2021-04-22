@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .forms import AddBlogForm
 
-from .models import Category, Blog, Person, Program
+from .models import Category, Blog, Person, Program, Presentation
 
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -54,9 +54,8 @@ def blog_detail(request, slug,  id):
 
 def people_list(request):
     persons = Person.objects.all()
-    for person in persons:
-        print(person.fullname)
-    return render(request, 'posts/people.html', {'persons': persons})
+    presentations = Presentation.objects.all()
+    return render(request, 'posts/people.html', {'persons': persons, 'presentations': presentations})
 
 
 def program_list(request):
