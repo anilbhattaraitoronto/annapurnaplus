@@ -18,7 +18,7 @@
             {% if featured_blog %}
             <h3 class="section-title">Featured Blog</h3>
             <div class="featured-blog">
-                <img src="{{featured_blog.thumbnail.url}}" alt="{{featured_blog.title}}" class="featured-blog-image">
+                <img src="{{featured_blog.image.url}}" alt="{{featured_blog.title}}" class="featured-blog-image">
                 <p> <a href="{% url 'posts:category_blogs' featured_blog.category_id featured_blog.category.slug %}" class="category-link">{{featured_blog.category.name | lower}}</a> </p>
                 <h3 class="item-title">{{featured_blog.title}}</h3>
                 <h4 class="author">{{featured_blog.author}}</h4>
